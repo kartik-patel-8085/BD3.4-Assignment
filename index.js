@@ -35,23 +35,21 @@ app.get('/cart/add', (req, res) => {
   res.json({ cartItems: result });
 });
 
-function editQuantity(productId, quantity) {
-  for (i = 0; i <= cart.length; i++) {
-    if (cart[i].productId == productId) {
+function editQuantity(cart, productId, quantity) {
+  for (i = 0; i < cart.length; i++) {
+    if (cart[i].productId === productId) {
       cart[i].quantity = quantity;
-      return cart;
-      i = i + 1;
-    } else {
-      console.log('Id not found');
+
     }
   }
+return cart
 }
 
 app.get('/cart/edit', (req, res) => {
   let productId = parseInt(req.query.productId);
   let quantity = parseInt(req.query.quantity);
 
-  let result = editQuantity(productId, quantity);
+  let result = editQuantity(cart, productId, quantity);
   res.json({ cartItems: result });
 });
 
